@@ -1,21 +1,22 @@
-const Connection = require('tedious').Connection;  
+require('dotenv').config();
+const { Connection } = require('tedious');
 
-var config = {  
-    server: `NAHU\\NAHUEL`,
+const config = {  
+    server: process.env.DB_SERVER,
     authentication: {
         type: 'default',
         options: {
-            userName: 'sa',
-            password: 'P@ssword!Strong'
+            userName: process.env.DB_USER,
+            password: process.env.DB_PASSWORD
         }
     },
     options: {
         encrypt: false,
-        database: 'conceweb',
-        
+        database: process.env.DB_NAME
     }
 };  
-var connection = new Connection(config); 
+
+const connection = new Connection(config);
 
 connection.connect();
 
@@ -23,7 +24,6 @@ connection.on('connect', function(err) {
     if(err) {
         console.log("Error", err);
     }
-
 });
 
 module.exports = connection;
