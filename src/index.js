@@ -1,8 +1,6 @@
 const app = require('./server/server');
 const connection = require('./db/connectionDb');
 
-const port = 3000;
-
 connection.on('connect', (err) => {
     if (err) {
         console.log("Error", err);
