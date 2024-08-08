@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const path = require('path');
 const isAuthenticated = require('../middleware/AuthMiddleware.js');
-const urlLocal = process.env.URL_LOCALHOST
+
 const indexRoutes = require('../routes/index.js');
 
 const app = express();
@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 
 // Configura CORS
 const corsOptions = {
-    origin: urlLocal, // Especifica el origen permitido
+    origin: `${process.env.LOCALHOST_URL}`, // Especifica el origen permitido
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type'],
     credentials: true // Permitir el envío de cookies y encabezados de autorización
@@ -41,6 +41,9 @@ app.use(cors(corsOptions));
 app.use('/api', indexRoutes);
 
 
+app.use("/", (req,res) => {
+    res.send("Hola")
+});
 
 app.use(express.static(path.join(__dirname, 'public')));
 
