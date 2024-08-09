@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 
 // Configura CORS
 const corsOptions = {
-    origin: `${process.env.LOCALHOST_URL}`, // Especifica el origen permitido
+    origin: `http://localhost:8080`, // Especifica el origen permitido
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type'],
     credentials: true // Permitir el envío de cookies y encabezados de autorización
