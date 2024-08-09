@@ -1,0 +1,27 @@
+# ./docker-compose.yml
+
+version: '3'
+
+services:
+  db:
+    container_name: sqlserver
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "P@ssword!Strong"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - ./server/migration/:/data/
+    # command: "/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P R00t#12345 -i /data/CREATE_SCHEMA.sql"
+    ports:
+      - "1433:1433"
+  web:
+    container_name: node_web
+    image: node
+    working_dir: /back-conce
+    command: bash -c "npm install && npm start"
+    depends_on:
+      - db
+    volumes:
+      - .:/app/
+    ports:
+      - "3000:3000"
