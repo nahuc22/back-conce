@@ -14,7 +14,7 @@ var config = {
     options: {
         encrypt: false,
         database: `${process.env.DB_NAME}`,
-        
+        trustServerCertificate: true
     }
 };  
 var connection = new Connection(config); 

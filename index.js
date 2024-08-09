@@ -1,5 +1,5 @@
-const app = require('./server/server');
-const connection = require('./db/connectionDb');
+const app = require('./src/server/server.js');
+const connection = require('./src/db/connectionDb');
 
 
 connection.on('connect', (err) => {
